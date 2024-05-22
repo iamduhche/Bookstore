@@ -1,0 +1,48 @@
+﻿@model AllBooksViewModel
+
+<head>
+    <title>Our Bookstore</title>
+    <style>
+        /* Custom button style */
+        .custom-button {
+            display: inline-block;
+            background-color: #e6a756; /* Button color */
+            color: #fff; /* Text color */
+            padding: 10px 20px; /* Padding around text */
+            font-size: 16px; /* Font size */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Add cursor pointer */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+            /* Hover effect */
+            .custom-button:hover {
+                background-color: #e19533; /* Darker shade of button color on hover */
+            }
+    </style>
+</head>
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var book in Model.Books)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" height="550px" src="@book.ImageUrl" alt="Book Cover">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center">@book.Title</h5>
+                            <p class="card-subtitle text-center">@book.Author</p>
+                            <button class="custom-button">BGN @book.Price</button> <!-- Apply custom button class -->
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

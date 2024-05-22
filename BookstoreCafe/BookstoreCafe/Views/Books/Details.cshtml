@@ -1,0 +1,17 @@
+﻿@model BookDetailsViewModel
+
+@{
+    ViewBag.Title = "Book Details";
+}
+
+<h2 class="text-center text-white">@ViewBag.Title</h2>
+<hr />
+
+<div class="card text-center mx-auto" style="width: 25rem;">
+    <img class="card-img-top" src="@Model.ImageUrl" alt="Cover Cover">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Author</p>
+        <p class="card-text">@Model.Price</p>
+    </div>
+</div>
