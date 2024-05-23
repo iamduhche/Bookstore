@@ -17,6 +17,7 @@ namespace BookstoreCafe.Controllers
             this.data = data;
         }
 
+        
         public IActionResult All()
         {
             var books = new AllBooksViewModel
@@ -78,7 +79,6 @@ namespace BookstoreCafe.Controllers
         [HttpPost]
         public IActionResult Add(BookFormModel model)
         {
-            // Check if the GenreId exists in the Genres table
             if (!this.data.Genres.Any(g => g.Id == model.GenreId))
             {
                 ModelState.AddModelError("GenreId", "Selected genre does not exist.");
@@ -106,6 +106,104 @@ namespace BookstoreCafe.Controllers
             this.data.SaveChanges();
 
             return RedirectToAction(nameof(Details), new { id = book.Id });
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var book = this.data.Books.Find(id);
+
+            if (book is null)
+            {
+                return BadRequest();
+            }
+
+            var bookModel = new BookFormModel()
+            {
+                Title = book.Title,
+                Author = book.Author,
+                Description = book.Description,
+                Price = book.Price,
+                YearOfRelease = book.YearOfRelease,
+                NumberOfPages = book.NumberOfPages,
+                TypeOfCover = book.TypeOfCover,
+                ImageUrl = book.ImageUrl,
+                GenreId = book.GenreId,
+                Genres = this.GetBookGenres()
+            };
+
+            return View(bookModel);
+
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, BookFormModel model)
+        {
+            var book = this.data.Books.Find(id);
+            if (book is null)
+            {
+                return this.View();
+            }
+
+            if (!this.data.Genres.Any(g => g.Id == model.GenreId))
+            {
+                ModelState.AddModelError("GenreId", "Selected genre does not exist.");
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                model.Genres = this.GetBookGenres();
+                return View(model);
+            }
+
+            book.Title = model.Title;
+            book.Author = model.Author;
+            book.Description = model.Description;
+            book.YearOfRelease = model.YearOfRelease;
+            book.NumberOfPages = model.NumberOfPages;
+            book.TypeOfCover = model.TypeOfCover;
+            book.ImageUrl = model.ImageUrl;
+            book.Price = model.Price;
+            book.GenreId = model.GenreId;
+
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(Details), new { id = book.Id });
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var book = this.data.Books.Find(id);
+
+            if (book is null)
+            {
+                return BadRequest();
+            }
+
+            var model = new BookViewModel()
+            {
+                Title = book.Title,
+                Author = book.Author,
+                ImageUrl = book.ImageUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(BookViewModel model)
+        {
+            var book = this.data.Books.Find(model.Id);
+
+            if (book is null)
+            {
+                return BadRequest();
+            }
+
+            this.data.Books.Remove(book);
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(All));
         }
     }
 }
