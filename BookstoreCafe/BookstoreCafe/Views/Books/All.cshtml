@@ -1,48 +1,56 @@
-﻿@model AllBooksViewModel
+﻿@model IEnumerable<BookstoreCafe.Data.Entities.Book>
+
+@{
+    ViewBag.Title = "All Books";
+}
 
 <head>
-    <title>Our Bookstore</title>
-    <style>
-        /* Custom button style */
-        .custom-button {
-            display: inline-block;
-            background-color: #e6a756; /* Button color */
-            color: #fff; /* Text color */
-            padding: 10px 20px; /* Padding around text */
-            font-size: 16px; /* Font size */
-            border: none; /* Remove border */
-            border-radius: 5px; /* Rounded corners */
-            cursor: pointer; /* Add cursor pointer */
-            transition: background-color 0.3s; /* Smooth transition for background color */
-        }
-
-            /* Hover effect */
-            .custom-button:hover {
-                background-color: #e19533; /* Darker shade of button color on hover */
-            }
-    </style>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/form-style.css" />
+    <header>
+        <h1 class="site-heading text-center text-faded d-none d-lg-block">
+            <span class="site-heading-lower">@ViewBag.Title</span>
+        </h1>
+    </header>
 </head>
-<section class="page-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <hr />
-            </div>
+
+<div class="container mt-5 text-light">
+    <hr class="bg-light" />
+
+    <form asp-action="All" method="get" class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control text-light border-secondary" placeholder="Search by title or author..." name="searchString" value="@ViewData["CurrentFilter"]" />
+            <button class="btn btn-primary" type="submit">Search</button>
         </div>
-        <div class="row">
-            @foreach (var book in Model.Books)
-            {
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" height="550px" src="@book.ImageUrl" alt="Book Cover">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center">@book.Title</h5>
-                            <p class="card-subtitle text-center">@book.Author</p>
-                            <button class="custom-button">BGN @book.Price</button> <!-- Apply custom button class -->
+        <div class="d-flex justify-content-center">
+            <a asp-action="All" asp-route-sortOrder="@ViewData["TitleSortParm"]" class="btn btn-outline-light mx-1">Title</a>
+            <a asp-action="All" asp-route-sortOrder="@ViewData["AuthorSortParm"]" class="btn btn-outline-light mx-1">Author</a>
+            <a asp-action="All" asp-route-sortOrder="@ViewData["PriceSortParm"]" class="btn btn-outline-light mx-1">Price</a>
+        </div>
+    </form>
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow" style="height: 790px;">
+                    <img class="card-img-top" height="575px" src="@book.ImageUrl" alt="@book.Title" />
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h5 class="card-title text-primary">@book.Title</h5>
+                            <p class="card-text text-dark">@book.Author</p>
+                        </div>
+                        <div>
+                            <p class="card-text text-dark">$@book.Price</p>
+                            <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary mt-auto">View Details</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-</section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

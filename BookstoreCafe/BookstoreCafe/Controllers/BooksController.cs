@@ -4,6 +4,7 @@ using BookstoreCafe.Models;
 using BookstoreCafe.Models.Books;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Drawing.Text;
 
 namespace BookstoreCafe.Controllers
@@ -17,23 +18,44 @@ namespace BookstoreCafe.Controllers
             this.data = data;
         }
 
-        
-        public IActionResult All()
+
+        public IActionResult All(string searchString, string sortOrder)
         {
-            var books = new AllBooksViewModel
+            var books = from b in data.Books
+                        select b;
+
+            if (!string.IsNullOrEmpty(searchString))
             {
-                Books = this.data.Books
-                    .Select(b => new BookDetailsViewModel
-                    {
-                        Title = b.Title,
-                        ImageUrl = b.ImageUrl,
-                        Author = b.Author,
-                        Price = b.Price
-                    })
+                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString));
+            }
 
-            };
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["AuthorSortParm"] = sortOrder == "Author" ? "author_desc" : "Author";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
 
-            return View(books);
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    books = books.OrderByDescending(b => b.Title);
+                    break;
+                case "Author":
+                    books = books.OrderBy(b => b.Author);
+                    break;
+                case "author_desc":
+                    books = books.OrderByDescending(b => b.Author);
+                    break;
+                case "Price":
+                    books = books.OrderBy(b => b.Price);
+                    break;
+                case "price_desc":
+                    books = books.OrderByDescending(b => b.Price);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.Title);
+                    break;
+            }
+
+            return View(books.ToList());
         }
 
         public IActionResult Details(int id)
@@ -203,7 +225,7 @@ namespace BookstoreCafe.Controllers
             this.data.Books.Remove(book);
             this.data.SaveChanges();
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details));
         }
     }
 }
