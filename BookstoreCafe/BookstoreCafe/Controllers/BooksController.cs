@@ -60,22 +60,30 @@ namespace BookstoreCafe.Controllers
 
         public IActionResult Details(int id)
         {
-            var book = this.data.Books.Find(id);
-            
-            if (book is null)
+            var book = data.Books
+                .Include(b => b.Genre) // Assuming you have a navigation property Genre in your Book entity
+                .FirstOrDefault(b => b.Id == id);
+
+            if (book == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            var bookModel = new BookDetailsViewModel()
+            var model = new BookDetailsViewModel
             {
+                Id = book.Id,
                 Title = book.Title,
                 Author = book.Author,
+                Description = book.Description,
+                YearOfRelease = book.YearOfRelease,
+                NumberOfPages = book.NumberOfPages,
+                TypeOfCover = book.TypeOfCover,
+                ImageUrl = book.ImageUrl,
                 Price = book.Price,
-                ImageUrl = book.ImageUrl
+                Genre = book.Genre.Name
             };
 
-            return View(bookModel);
+            return View(model);
         }
 
 
@@ -225,7 +233,7 @@ namespace BookstoreCafe.Controllers
             this.data.Books.Remove(book);
             this.data.SaveChanges();
 
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(All));
         }
     }
 }

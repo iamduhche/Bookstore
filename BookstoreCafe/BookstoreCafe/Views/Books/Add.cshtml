@@ -1,7 +1,7 @@
 ﻿@model BookFormModel
 
 @{
-    ViewBag.Title = "Edit Book";
+    ViewBag.Title = "Add a Book";
 }
 
 <head>
@@ -17,10 +17,60 @@
                     <h2 class="card-title text-center text-primary">@ViewBag.Title</h2>
                     <hr />
                     <form method="post">
-                        <partial name="_BookFormPartial" model="@Model" />
-                        <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <div class="form-group">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control" placeholder="Title..." />
+                            <span asp-validation-for="Title" class="small text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="Author" class="form-label"></label>
+                            <input asp-for="Author" class="form-control" placeholder="Author..." />
+                            <span asp-validation-for="Author" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" rows="4" class="form-control" placeholder="Description of the book..."></textarea>
+                            <span asp-validation-for="Description" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="YearOfRelease" class="form-label"></label>
+                            <input asp-for="YearOfRelease" class="form-control" placeholder="2000" />
+                            <span asp-validation-for="YearOfRelease" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberOfPages" class="form-label"></label>
+                            <input asp-for="NumberOfPages" class="form-control" placeholder="1500" />
+                            <span asp-validation-for="NumberOfPages" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TypeOfCover" class="form-label"></label>
+                            <select asp-for="TypeOfCover" class="form-control">
+                                <option value="Soft">Soft</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                            <span asp-validation-for="TypeOfCover" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageUrl" class="form-label"></label>
+                            <input asp-for="ImageUrl" class="form-control" placeholder="Your image URL here..." />
+                            <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="form-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GenreId" class="form-label"></label>
+                            <select asp-for="GenreId" class="form-control">
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <option value="@genre.Id">@genre.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="GenreId" class="small text-danger"></span>
+                        </div>
+                        <input class="btn btn-primary mt-3" type="submit" value="Save" />
                     </form>
                 </div>
             </div>
