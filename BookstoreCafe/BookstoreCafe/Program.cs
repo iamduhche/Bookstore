@@ -4,6 +4,7 @@ using BookstoreCafe.Infrastructure;
 using BookstoreCafe.Services.Books;
 using BookstoreCafe.Services.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
@@ -34,6 +35,11 @@ builder.Services.AddTransient<IBookService, BookService>();
 // Add controllers with views
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
+
 // Build the app
 var app = builder.Build();
 
@@ -61,7 +67,17 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
+app.MapControllerRoute(
+    name: "bookDetails",
+    pattern: "Books/Details/{slug}-{id}",
+    defaults: new { controller = "Books", action = "Details" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
 app.MapRazorPages();
 
 app.Run();

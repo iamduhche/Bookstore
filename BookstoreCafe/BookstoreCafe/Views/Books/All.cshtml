@@ -42,7 +42,7 @@
                         </div>
                         <div>
                             <p class="card-text text-dark">$@book.Price</p>
-                            <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary mt-auto">View Details</a>
+                            <a href="@Url.Action("Details", "Books", new { slug = UrlHelper.GenerateSlug(book.Title, book.Author), id = book.Id })" class="btn btn-primary mt-auto">View Details</a>
                         </div>
                     </div>
                 </div>

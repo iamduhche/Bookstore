@@ -1,11 +1,7 @@
 ﻿using BookstoreCafe.Data.Entities;
 using BookstoreCafe.Models.Books;
 using BookstoreCafe.Services.Books;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BookstoreCafe.Controllers
 {
@@ -32,13 +28,32 @@ namespace BookstoreCafe.Controllers
             return View(sortedBooks);
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var book = _bookService.GetBookDetails(id);
-
             if (book == null)
             {
                 return NotFound();
+            }
+
+            string slug = UrlHelper.GenerateSlug(book.Title, book.Author);
+            return RedirectToActionPermanent(nameof(Details), new { slug = slug, id = id });
+        }
+
+        [HttpGet("Books/Details/{slug}-{id}")]
+        public IActionResult Details(string slug, int id)
+        {
+            var book = _bookService.GetBookDetails(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            string expectedSlug = UrlHelper.GenerateSlug(book.Title, book.Author);
+            if (slug != expectedSlug)
+            {
+                return RedirectToActionPermanent(nameof(Details), new { slug = expectedSlug, id = id });
             }
 
             return View(book);
@@ -108,10 +123,10 @@ namespace BookstoreCafe.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Delete(BookViewModel model)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
         {
-            _bookService.DeleteBook(model.Id);
+            _bookService.DeleteBook(id);
 
             return RedirectToAction(nameof(All));
         }
