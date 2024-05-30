@@ -29,6 +29,11 @@
                             <div class="text-center mt-4">
                                 <a href="@Url.Action("All", "Books")" class="btn btn-secondary mr-2">Back</a>
                                 <button class="btn btn-primary">Add to Cart</button>
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <a href="@Url.Action("Edit", "Books", new { id = Model.Id })" class="btn btn-warning mr-2">Edit</a>
+                                    <a href="@Url.Action("Delete", "Books", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+                                }
                             </div>
                         </div>
                     </div>

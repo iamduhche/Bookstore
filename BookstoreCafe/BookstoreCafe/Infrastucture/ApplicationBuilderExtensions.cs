@@ -26,7 +26,7 @@ namespace BookstoreCafe.Infrastructure
                         return;
                     }
 
-                    var role = new IdentityRole { Name = "AdminRoleName" };
+                    var role = new IdentityRole { Name = "Administrator" };
 
                     await roleManager.CreateAsync(role);
 
