@@ -12,8 +12,11 @@ namespace BookstoreCafe.Infrastructure
 
             var services = scopedServices.ServiceProvider;
 
-            var userManager = services.GetRequiredService<UserManager<User>>();
-            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = services
+                .GetRequiredService<UserManager<User>>();
+
+            var roleManager = services
+                .GetRequiredService<RoleManager<IdentityRole>>();
 
             Task
                 .Run(async () =>
@@ -23,16 +26,15 @@ namespace BookstoreCafe.Infrastructure
                         return;
                     }
 
-                    var role = new IdentityRole { Name = "Administrator" };
+                    var role = new IdentityRole { Name = "AdminRoleName" };
 
                     await roleManager.CreateAsync(role);
 
                     var admin = await userManager.FindByNameAsync("admin@mail.com");
 
                     await userManager.AddToRoleAsync(admin, role.Name);
-
-
                 })
+
                 .GetAwaiter().GetResult();
 
             return app;

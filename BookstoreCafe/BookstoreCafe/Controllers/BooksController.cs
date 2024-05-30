@@ -1,221 +1,109 @@
-﻿using BookstoreCafe.Data;
-using BookstoreCafe.Data.Entities;
-using BookstoreCafe.Models;
+﻿using BookstoreCafe.Data.Entities;
 using BookstoreCafe.Models.Books;
+using BookstoreCafe.Services.Books;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BookstoreCafe.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly BookCafeDbContext data;
+        private readonly IBookService _bookService;
 
-        public BooksController(BookCafeDbContext data)
+        public BooksController(IBookService bookService)
         {
-            this.data = data;
+            _bookService = bookService;
         }
-
 
         public IActionResult All(string searchString, string sortOrder)
         {
-            var books = from b in data.Books
-                        select b;
+            var books = _bookService.GetAllBooks();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString));
+                books = _bookService.SearchBooks(searchString);
             }
 
-            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewData["AuthorSortParm"] = sortOrder == "Author" ? "author_desc" : "Author";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var sortedBooks = _bookService.SortBooks(books, sortOrder);
 
-            switch (sortOrder)
-            {
-                case "title_desc":
-                    books = books.OrderByDescending(b => b.Title);
-                    break;
-                case "Author":
-                    books = books.OrderBy(b => b.Author);
-                    break;
-                case "author_desc":
-                    books = books.OrderByDescending(b => b.Author);
-                    break;
-                case "Price":
-                    books = books.OrderBy(b => b.Price);
-                    break;
-                case "price_desc":
-                    books = books.OrderByDescending(b => b.Price);
-                    break;
-                default:
-                    books = books.OrderBy(b => b.Title);
-                    break;
-            }
-
-            return View(books.ToList());
+            return View(sortedBooks);
         }
 
         public IActionResult Details(int id)
         {
-            var book = data.Books
-                .Include(b => b.Genre) // Assuming you have a navigation property Genre in your Book entity
-                .FirstOrDefault(b => b.Id == id);
+            var book = _bookService.GetBookDetails(id);
 
             if (book == null)
             {
                 return NotFound();
             }
 
-            var model = new BookDetailsViewModel
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = book.Author,
-                Description = book.Description,
-                YearOfRelease = book.YearOfRelease,
-                NumberOfPages = book.NumberOfPages,
-                TypeOfCover = book.TypeOfCover,
-                ImageUrl = book.ImageUrl,
-                Price = book.Price,
-                Genre = book.Genre.Name
-            };
+            return View(book);
+        }
+
+        public IActionResult Add()
+        {
+            var genres = _bookService.GetAllGenres();
+            var model = new BookFormModel { Genres = genres };
 
             return View(model);
         }
 
-
-        public IActionResult Add()
-        {
-            return View(new BookFormModel
-            {
-                Genres = this.GetBookGenres()
-            });
-
-
-        }
-        private IEnumerable<BookGenreViewModel> GetBookGenres() =>
-            this.data
-            .Genres
-            .Select(g => new BookGenreViewModel
-            {
-                Id = g.Id,
-                Name = g.Name
-            })
-            .ToList();
-
         [HttpPost]
         public IActionResult Add(BookFormModel model)
         {
-            if (!this.data.Genres.Any(g => g.Id == model.GenreId))
-            {
-                ModelState.AddModelError("GenreId", "Selected genre does not exist.");
-            }
-
             if (!ModelState.IsValid)
             {
+                model.Genres = _bookService.GetAllGenres();
                 return View(model);
             }
 
-            var book = new Book
-            {
-                Title = model.Title,
-                Author = model.Author,
-                Description = model.Description,
-                Price = model.Price,
-                YearOfRelease = model.YearOfRelease,
-                NumberOfPages = model.NumberOfPages,
-                TypeOfCover = model.TypeOfCover,
-                ImageUrl = model.ImageUrl,
-                GenreId = model.GenreId
-            };
+            _bookService.AddBook(model);
 
-            this.data.Books.Add(book);
-            this.data.SaveChanges();
-
-            return RedirectToAction(nameof(Details), new { id = book.Id });
+            return RedirectToAction(nameof(All));
         }
 
         public IActionResult Edit(int id)
         {
-            var book = this.data.Books.Find(id);
+            var book = _bookService.GetBookById(id);
 
-            if (book is null)
+            if (book == null)
             {
                 return BadRequest();
             }
 
-            var bookModel = new BookFormModel()
-            {
-                Title = book.Title,
-                Author = book.Author,
-                Description = book.Description,
-                Price = book.Price,
-                YearOfRelease = book.YearOfRelease,
-                NumberOfPages = book.NumberOfPages,
-                TypeOfCover = book.TypeOfCover,
-                ImageUrl = book.ImageUrl,
-                GenreId = book.GenreId,
-                Genres = this.GetBookGenres()
-            };
+            var model = _bookService.MapBookToFormModel(book);
 
-            return View(bookModel);
-
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Edit(int id, BookFormModel model)
         {
-            var book = this.data.Books.Find(id);
-            if (book is null)
-            {
-                return this.View();
-            }
-
-            if (!this.data.Genres.Any(g => g.Id == model.GenreId))
-            {
-                ModelState.AddModelError("GenreId", "Selected genre does not exist.");
-            }
-
-
             if (!ModelState.IsValid)
             {
-                model.Genres = this.GetBookGenres();
+                model.Genres = _bookService.GetAllGenres();
                 return View(model);
             }
 
-            book.Title = model.Title;
-            book.Author = model.Author;
-            book.Description = model.Description;
-            book.YearOfRelease = model.YearOfRelease;
-            book.NumberOfPages = model.NumberOfPages;
-            book.TypeOfCover = model.TypeOfCover;
-            book.ImageUrl = model.ImageUrl;
-            book.Price = model.Price;
-            book.GenreId = model.GenreId;
+            _bookService.UpdateBook(id, model);
 
-            this.data.SaveChanges();
-
-            return RedirectToAction(nameof(Details), new { id = book.Id });
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         public IActionResult Delete(int id)
         {
-            var book = this.data.Books.Find(id);
+            var book = _bookService.GetBookById(id);
 
-            if (book is null)
+            if (book == null)
             {
                 return BadRequest();
             }
 
-            var model = new BookViewModel()
-            {
-                Title = book.Title,
-                Author = book.Author,
-                ImageUrl = book.ImageUrl
-            };
+            var model = _bookService.MapBookToViewModel(book);
 
             return View(model);
         }
@@ -223,15 +111,7 @@ namespace BookstoreCafe.Controllers
         [HttpPost]
         public IActionResult Delete(BookViewModel model)
         {
-            var book = this.data.Books.Find(model.Id);
-
-            if (book is null)
-            {
-                return BadRequest();
-            }
-
-            this.data.Books.Remove(book);
-            this.data.SaveChanges();
+            _bookService.DeleteBook(model.Id);
 
             return RedirectToAction(nameof(All));
         }

@@ -4,6 +4,7 @@ using BookstoreCafe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstoreCafe.Data.Migrations
 {
     [DbContext(typeof(BookCafeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530120034_AdminRole")]
+    partial class AdminRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,40 +80,40 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = 1,
                             Author = "zeppazariel",
-                            Description = "There's never enough time. They had ten years, and still, that wasn't enough...\n \nRegulus Black was fifteen the first time his name was called at a reaping. He's twenty-five when it happens to him again. A lot has changed in that time, and one of them is that he's ready to do whatever it takes to make it home. Nothing or no one will stop him, not even James Potter.\r\n\r\nJames Potter has no plans to stop Regulus Black from making it home. In fact, his plans revolve around the opposite. He has his reasons, but he's made his choice to get Regulus out of the arena, even knowing it'll be the last thing he ever does.\r\n\r\nSirius Black was sixteen when he volunteered to take his little brother's place in the arena. At twenty-six, without the option to do it again, he has no choice but to be a mentor to his brother and best friend, knowing that only one of them can make it back out.\r\n\r\nTwo names called, a mentor on the verge of falling apart, and more secrets and grief between all of them than they know how to handle. None of them are prepared for what comes next, or how far they'll go to make it through.",
+                            Description = "Regulus Black was fifteen the first time his name was called at a reaping. He's twenty-five when it happens to him again. A lot has changed in that time, and one of them is that he's ready to do whatever it takes to make it home. Nothing or no one will stop him, not even James Potter.\r\n\r\nJames Potter has no plans to stop Regulus Black from making it home. In fact, his plans revolve around the opposite. He has his reasons, but he's made his choice to get Regulus out of the arena, even knowing it'll be the last thing he ever does.\r\n\r\nSirius Black was sixteen when he volunteered to take his little brother's place in the arena. At twenty-six, without the option to do it again, he has no choice but to be a mentor to his brother and best friend, knowing that only one of them can make it back out.\r\n\r\nTwo names called, a mentor on the verge of falling apart, and more secrets and grief between all of them than they know how to handle. None of them are prepared for what comes next, or how far they'll go to make it through.",
                             GenreId = 1,
-                            ImageUrl = "https://gcdnb.pbrd.co/images/UsjakXzwxKbS.png?o=1",
-                            NumberOfPages = 743,
-                            Price = 18.99m,
-                            Title = "Crimson Rivers Book 1",
+                            ImageUrl = "https://i.pinimg.com/originals/71/8c/56/718c5681a2d7f0af950b4fa2897cfad8.png",
+                            NumberOfPages = 2951,
+                            Price = 19.99m,
+                            Title = "Crimson Rivers",
                             TypeOfCover = "Hard",
                             YearOfRelease = 2023
                         },
                         new
                         {
                             Id = 2,
-                            Author = "zeppazariel",
-                            Description = "It's devastating that a tear shed in heartbreak is the only thing that they get to have for themselves. But this is what they are. A great, big tragedy...\n \nRegulus Black was fifteen the first time his name was called at a reaping. He's twenty-five when it happens to him again. A lot has changed in that time, and one of them is that he's ready to do whatever it takes to make it home. Nothing or no one will stop him, not even James Potter.\r\n\r\nJames Potter has no plans to stop Regulus Black from making it home. In fact, his plans revolve around the opposite. He has his reasons, but he's made his choice to get Regulus out of the arena, even knowing it'll be the last thing he ever does.\r\n\r\nSirius Black was sixteen when he volunteered to take his little brother's place in the arena. At twenty-six, without the option to do it again, he has no choice but to be a mentor to his brother and best friend, knowing that only one of them can make it back out.\r\n\r\nTwo names called, a mentor on the verge of falling apart, and more secrets and grief between all of them than they know how to handle. None of them are prepared for what comes next, or how far they'll go to make it through.",
-                            GenreId = 1,
-                            ImageUrl = "https://gcdnb.pbrd.co/images/QKZPVkKBERJl.png?o=1",
-                            NumberOfPages = 694,
-                            Price = 18.99m,
-                            Title = "Crimson Rivers Book 2",
-                            TypeOfCover = "Hard",
+                            Author = "Solmussa",
+                            Description = "Regulus Black is angry. He wants revenge. He wants to watch the world burn for all it's done to him. He also wants to make out with James Potter, but that's a secret he'll take to the grave. Vengeance is more important than... whatever it is that chokes him when he lays eyes on Potter.\r\n\r\nJames Potter is confused, because Regulus Black is, all of a sudden, hot. And it's unfair because Sirius is going to kill him if he doesn't get his impulse control in line.",
+                            GenreId = 2,
+                            ImageUrl = "https://i.etsystatic.com/49073640/r/il/880985/5677125327/il_1080xN.5677125327_bmyu.jpg",
+                            NumberOfPages = 2205,
+                            Price = 17.99m,
+                            Title = "Only the Brave",
+                            TypeOfCover = "Soft",
                             YearOfRelease = 2023
                         },
                         new
                         {
                             Id = 3,
-                            Author = "zeppazariel",
-                            Description = "Hurting together. Mourning together. Terrified together. Never one without the other, evein in pain. One day at a time, together, all of them.\n \nRegulus Black was fifteen the first time his name was called at a reaping. He's twenty-five when it happens to him again. A lot has changed in that time, and one of them is that he's ready to do whatever it takes to make it home. Nothing or no one will stop him, not even James Potter.\r\n\r\nJames Potter has no plans to stop Regulus Black from making it home. In fact, his plans revolve around the opposite. He has his reasons, but he's made his choice to get Regulus out of the arena, even knowing it'll be the last thing he ever does.\r\n\r\nSirius Black was sixteen when he volunteered to take his little brother's place in the arena. At twenty-six, without the option to do it again, he has no choice but to be a mentor to his brother and best friend, knowing that only one of them can make it back out.\r\n\r\nTwo names called, a mentor on the verge of falling apart, and more secrets and grief between all of them than they know how to handle. None of them are prepared for what comes next, or how far they'll go to make it through.",
+                            Author = "MsKingBean89",
+                            Description = "The story starts in the early 1970s and follows Remus Lupin's years at Hogwarts and the love story between himself and Sirius Black. It ends in summer 1995, around the beginning of the events of Harry Potter and the Order of the Phoenix. The story has garnered positive response from critics and fans while also gaining popularity online for its internet memes, fancastings and LGBTQ+ representation.",
                             GenreId = 1,
-                            ImageUrl = "https://gcdnb.pbrd.co/images/YyL1yTBQMKNd.png?o=1",
-                            NumberOfPages = 757,
-                            Price = 18.99m,
-                            Title = "Crimson Rivers Book 3",
-                            TypeOfCover = "Hard",
-                            YearOfRelease = 2023
+                            ImageUrl = "https://i.pinimg.com/originals/cb/1c/f9/cb1cf917b12bae747d30079b6601d8bc.jpg",
+                            NumberOfPages = 1800,
+                            Price = 15.99m,
+                            Title = "All the Young Dudes",
+                            TypeOfCover = "Soft",
+                            YearOfRelease = 2018
                         });
                 });
 
@@ -247,7 +249,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "1297764b-dd30-4c4a-be10-a188dde20808",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5ebc0aba-c9e8-4dd9-8556-4a1665a28334",
+                            ConcurrencyStamp = "2cfa3c90-6a13-4373-a1a3-e599f856b45c",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -255,9 +257,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFZUN4Ki7hkobl++975edqs+9NkhDCp9tOaKf3gDB3YQ2bf9twxg5RfDnCWZ3elxDg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ0rnKjppDfVSg4BhJEkzmTyPL57o3h3mypaNHp+Llo+EL1Hu3mj5iJ1y77OaNezjg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c320371-24df-46a4-bd67-75aa9a045084",
+                            SecurityStamp = "2534be05-8257-4fa9-9090-cab8860d479e",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -265,7 +267,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "574371A3-4F4E-409A-9A0E-B2F1EA03E1AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "06a6c5e8-31b3-4274-b29b-2b33d2afb363",
+                            ConcurrencyStamp = "2c9203dc-72cc-48a2-9a32-62dde0190417",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Bate",
@@ -273,9 +275,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENWw2Cqb+5VysvRvM7mAr791D0eER/aALD8dvh2qYDHWsf3opiGrEC12oSN5pA+qWw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM3kfbcZZSIfx+xQRmX9iZELdD4mSyEbYye1P3Os0zi7CTH1TAMtR2ncC3K0DBE0kA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1dc2d43f-10f3-4fb7-8078-d3bdb2a49017",
+                            SecurityStamp = "1b01b016-0ce0-4dd3-8644-992423c1ba20",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -306,6 +308,15 @@ namespace BookstoreCafe.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "AE8EED0F-B227-4EA2-AB30-EAEC435631A9",
+                            ConcurrencyStamp = "aee5e544-df4c-434e-8824-4d9893d0a141",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -395,6 +406,13 @@ namespace BookstoreCafe.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "574371A3-4F4E-409A-9A0E-B2F1EA03E1AB",
+                            RoleId = "AE8EED0F-B227-4EA2-AB30-EAEC435631A9"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

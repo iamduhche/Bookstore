@@ -1,19 +1,21 @@
 using BookstoreCafe.Data;
 using BookstoreCafe.Data.Entities;
 using BookstoreCafe.Infrastructure;
+using BookstoreCafe.Services.Books;
 using BookstoreCafe.Services.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure the database connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<BookCafeDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+// Configure Identity options
 builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -22,17 +24,23 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<BookCafeDbContext>();
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<BookCafeDbContext>();
 
+// Register application services
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IBookService, BookService>();
 
+// Add controllers with views
 builder.Services.AddControllersWithViews();
 
+// Build the app
 var app = builder.Build();
 
+// Seed admin user
 app.SeedAdmin();
 
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -40,7 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/Error/500");
+    app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
     app.UseHsts();
 }
 
