@@ -1,7 +1,6 @@
-﻿using BookstoreCafe.Data.Entities;
-using BookstoreCafe.Models.Books;
-using BookstoreCafe.Services.Books;
+﻿using BookstoreCafe.Services.Books;
 using Microsoft.AspNetCore.Mvc;
+using BookstoreCafe.Services.Books.Models;
 
 namespace BookstoreCafe.Controllers
 {
@@ -62,13 +61,13 @@ namespace BookstoreCafe.Controllers
         public IActionResult Add()
         {
             var genres = _bookService.GetAllGenres();
-            var model = new BookFormModel { Genres = genres };
+            var model = new BookFormServiceModel { Genres = genres };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Add(BookFormModel model)
+        public IActionResult Add(BookFormServiceModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -96,7 +95,7 @@ namespace BookstoreCafe.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, BookFormModel model)
+        public IActionResult Edit(int id, BookFormServiceModel model)
         {
             if (!ModelState.IsValid)
             {

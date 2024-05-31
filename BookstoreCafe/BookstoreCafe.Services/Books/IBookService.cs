@@ -1,5 +1,5 @@
 ﻿using BookstoreCafe.Data.Entities;
-using BookstoreCafe.Models.Books;
+using BookstoreCafe.Services.Books.Models;
 using System.Collections.Generic;
 
 namespace BookstoreCafe.Services.Books
@@ -9,13 +9,13 @@ namespace BookstoreCafe.Services.Books
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> SearchBooks(string searchString);
         IEnumerable<Book> SortBooks(IEnumerable<Book> books, string sortOrder);
-        BookDetailsViewModel GetBookDetails(int id);
-        IEnumerable<BookGenreViewModel> GetAllGenres();
-        void AddBook(BookFormModel model);
+        BookDetailsServiceModel GetBookDetails(int id);
+        IEnumerable<BookGenreServiceModel> GetAllGenres();
+        void AddBook(BookFormServiceModel model);
         Book GetBookById(int id);
-        BookFormModel MapBookToFormModel(Book book);
-        void UpdateBook(int id, BookFormModel model);
+        BookFormServiceModel MapBookToFormModel(Book book);
+        void UpdateBook(int id, BookFormServiceModel model);
         void DeleteBook(int id);
-        BookViewModel MapBookToViewModel(Book book);
+        BookServiceModel MapBookToViewModel(Book book);
     }
 }

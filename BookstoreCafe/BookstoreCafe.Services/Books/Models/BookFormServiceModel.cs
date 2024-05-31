@@ -1,10 +1,13 @@
-﻿using BookstoreCafe.Data.Entities;
-using BookstoreCafe.Models.Books;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BookstoreCafe.Models.Books
+namespace BookstoreCafe.Services.Books.Models
 {
-    public class BookFormModel
+    public class BookFormServiceModel
     {
         [Required]
         [StringLength(200, MinimumLength = 3)]
@@ -42,6 +45,7 @@ namespace BookstoreCafe.Models.Books
 
         [Display(Name = "Genre")]
         public int GenreId { get; init; }
-        public IEnumerable<BookGenreViewModel> Genres { get; set; } = new List<BookGenreViewModel>();
+        public IEnumerable<BookGenreServiceModel> Genres { get; set; } = new List<BookGenreServiceModel>();
+
     }
 }

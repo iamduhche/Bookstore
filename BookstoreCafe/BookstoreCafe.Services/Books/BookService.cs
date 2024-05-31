@@ -1,6 +1,6 @@
 ﻿using BookstoreCafe.Data;
 using BookstoreCafe.Data.Entities;
-using BookstoreCafe.Models.Books;
+using BookstoreCafe.Services.Books.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +47,7 @@ namespace BookstoreCafe.Services.Books
             }
         }
 
-        public BookDetailsViewModel GetBookDetails(int id)
+        public BookDetailsServiceModel GetBookDetails(int id)
         {
             var book = _context.Books
                 .Include(b => b.Genre)
@@ -58,7 +58,7 @@ namespace BookstoreCafe.Services.Books
                 return null;
             }
 
-            return new BookDetailsViewModel
+            return new BookDetailsServiceModel
             {
                 Id = book.Id,
                 Title = book.Title,
@@ -73,10 +73,10 @@ namespace BookstoreCafe.Services.Books
             };
         }
 
-        public IEnumerable<BookGenreViewModel> GetAllGenres()
+        public IEnumerable<BookGenreServiceModel> GetAllGenres()
         {
             return _context.Genres
-                .Select(g => new BookGenreViewModel
+                .Select(g => new BookGenreServiceModel
                 {
                     Id = g.Id,
                     Name = g.Name
@@ -84,7 +84,7 @@ namespace BookstoreCafe.Services.Books
                 .ToList();
         }
 
-        public void AddBook(BookFormModel model)
+        public void AddBook(BookFormServiceModel model)
         {
             var book = new Book
             {
@@ -108,9 +108,9 @@ namespace BookstoreCafe.Services.Books
             return _context.Books.Find(id);
         }
 
-        public BookFormModel MapBookToFormModel(Book book)
+        public BookFormServiceModel MapBookToFormModel(Book book)
         {
-            return new BookFormModel
+            return new BookFormServiceModel
             {
                 Title = book.Title,
                 Author = book.Author,
@@ -125,7 +125,7 @@ namespace BookstoreCafe.Services.Books
             };
         }
 
-        public void UpdateBook(int id, BookFormModel model)
+        public void UpdateBook(int id, BookFormServiceModel model)
         {
             var book = _context.Books.Find(id);
             if (book == null)
@@ -158,9 +158,9 @@ namespace BookstoreCafe.Services.Books
             _context.SaveChanges();
         }
 
-        public BookViewModel MapBookToViewModel(Book book)
+        public BookServiceModel MapBookToViewModel(Book book)
         {
-            return new BookViewModel
+            return new BookServiceModel
             {
                 Id = book.Id,
                 Title = book.Title,
