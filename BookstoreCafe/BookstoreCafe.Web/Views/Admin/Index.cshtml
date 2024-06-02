@@ -1,0 +1,20 @@
+﻿@model int
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Admin Panel</div>
+
+                <div class="card-body">
+                    <h5>Welcome, Admin!</h5>
+                    <p>You have <strong>@Model</strong> orders pending.</p>
+                </div>
+
+                <div class="card-footer">
+                    <a href="@Url.Action("Orders", "Admin")" class="btn btn-primary">View Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

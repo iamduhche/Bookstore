@@ -4,6 +4,7 @@ using BookstoreCafe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstoreCafe.Data.Migrations
 {
     [DbContext(typeof(BookCafeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240602171729_OrderingProgress")]
+    partial class OrderingProgress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,9 +198,6 @@ namespace BookstoreCafe.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -359,7 +358,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "1297764b-dd30-4c4a-be10-a188dde20808",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b35d2f08-48dc-4e34-adb8-6b812c2e8b7a",
+                            ConcurrencyStamp = "dfcdbb2c-3901-46ba-b5a7-90f1a0e56d54",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -367,9 +366,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENfnlcq5kzdoZvnp0l/0Ly3xRAL7Qv1wjc9eXj4s8rmqASLNZcjnIAn9D+kDkpJoWA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGhArYd6v/9tgFP0MUltCVKGN5V397g+EIcqdp3fthSfqYeY3j4dHEmt6Wxur/avKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "321b84a4-ea48-4514-ac90-a0144d2a7b06",
+                            SecurityStamp = "634044b9-40f0-4d0f-a099-fde97d3bb32a",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -377,7 +376,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "574371A3-4F4E-409A-9A0E-B2F1EA03E1AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9a553b90-27c2-4a2d-8606-dfe947a7c1d0",
+                            ConcurrencyStamp = "59b57588-9c88-4fe7-a418-5e590c4d5cda",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Bate",
@@ -385,9 +384,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGkpDhxMBRFKCmtW3G5KFVcLrql1htsbCLNQokcfKVxzmpuNeUPRwdGIRrpcLlic5A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIQ8sTl3rhDNv290MDeO8uw6RsBPPxMmJrW3XPjjijT8BvPejX3v4B8X94+96UZv+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8483a054-bbe6-49dd-8459-0bff6dffa76b",
+                            SecurityStamp = "b3ff42a9-4d4d-492e-bdd7-30b0ec2438e9",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

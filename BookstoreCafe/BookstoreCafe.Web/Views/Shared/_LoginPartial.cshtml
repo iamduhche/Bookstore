@@ -29,7 +29,13 @@
         @if (User.IsInRole("Administrator"))
         {
             <li class="nav-item px-lg-4">
-                <a class="btn btn-primary ml-auto" href="/Admin">Admin Panel</a>
+                <a class="btn btn-primary ml-auto" href="/Admin/Index">Admin Panel</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item px-lg-4">
+                <a class="btn btn-primary ml-auto" href="/ShoppingCart/Index">Cart</a>
             </li>
         }
     }

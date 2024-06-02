@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookstoreCafe.Services.Books.Models
 {
-    public class BookGenreServiceModel
+    public class BookGenreModel
     {
         public int Id { get; set; }
         public string Name { get; init; } = null!;
