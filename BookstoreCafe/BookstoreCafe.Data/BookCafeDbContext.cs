@@ -50,7 +50,7 @@ namespace BookstoreCafe.Data
 
             SeedGenres();
             builder.Entity<Genre>()
-                .HasData(this.adventure, this.romance);
+                .HasData(this.adventure, this.romance, this.youngAdult);
 
             SeedBooks();
             builder.Entity<Book>()

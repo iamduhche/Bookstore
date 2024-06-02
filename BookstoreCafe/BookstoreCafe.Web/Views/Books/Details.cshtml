@@ -5,6 +5,7 @@
 }
 
 <head>
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
@@ -30,15 +31,15 @@
                                 <p><strong>Genre:</strong> <span class="text-dark">@Model.Genre</span></p>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="@Url.Action("All", "Books")" class="btn btn-secondary mr-2">Back</a>
+                                <a href="@Url.Action("All", "Books")" class="btn btn-secondary mb-2">Back</a>
                                 <form method="post" asp-action="AddToCart" asp-controller="ShoppingCart">
                                     <input type="hidden" name="bookId" value="@Model.Id" />
-                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                    <button type="submit" class="btn btn-primary mb-2">Add to Cart</button>
                                 </form>
                                 @if (User.IsInRole("Administrator"))
                                 {
-                                    <a href="@Url.Action("Edit", "Books", new { id = Model.Id })" class="btn btn-warning mr-2">Edit</a>
-                                    <a href="@Url.Action("Delete", "Books", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+                                    <a href="@Url.Action("Edit", "Books", new { id = Model.Id })" class="btn btn-warning mb-2">Edit</a>
+                                    <a href="@Url.Action("Delete", "Books", new { id = Model.Id })" class="btn btn-danger mb-2">Delete</a>
                                 }
                             </div>
                         </div>
@@ -48,8 +49,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-

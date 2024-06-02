@@ -1,6 +1,7 @@
 ﻿using BookstoreCafe.Services.Books;
 using Microsoft.AspNetCore.Mvc;
 using BookstoreCafe.Services.Books.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookstoreCafe.Controllers
 {
@@ -13,6 +14,7 @@ namespace BookstoreCafe.Controllers
             _bookService = bookService;
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult All(string searchString, string sortOrder)
         {
             var books = _bookService.GetAllBooks();
@@ -58,6 +60,7 @@ namespace BookstoreCafe.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult Add()
         {
             var genres = _bookService.GetAllGenres();
@@ -66,6 +69,7 @@ namespace BookstoreCafe.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult Add(BookFormModel model)
         {
@@ -80,6 +84,7 @@ namespace BookstoreCafe.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int id)
         {
             var book = _bookService.GetBookById(id);
@@ -94,6 +99,7 @@ namespace BookstoreCafe.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult Edit(int id, BookFormModel model)
         {
@@ -108,6 +114,7 @@ namespace BookstoreCafe.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int id)
         {
             var book = _bookService.GetBookById(id);
@@ -122,6 +129,7 @@ namespace BookstoreCafe.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {

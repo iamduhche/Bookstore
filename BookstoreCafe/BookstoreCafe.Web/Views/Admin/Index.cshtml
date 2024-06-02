@@ -1,5 +1,14 @@
 ﻿@model int
 
+@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,6 +22,7 @@
 
                 <div class="card-footer">
                     <a href="@Url.Action("Orders", "Admin")" class="btn btn-primary">View Orders</a>
+                    <a href="@Url.Action("Add", "Books")" class="btn btn-success">Add a Book</a>
                 </div>
             </div>
         </div>
