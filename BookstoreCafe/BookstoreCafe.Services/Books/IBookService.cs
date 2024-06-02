@@ -9,13 +9,13 @@ namespace BookstoreCafe.Services.Books
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> SearchBooks(string searchString);
         IEnumerable<Book> SortBooks(IEnumerable<Book> books, string sortOrder);
-        BookDetailsServiceModel GetBookDetails(int id);
-        IEnumerable<BookGenreServiceModel> GetAllGenres();
-        void AddBook(BookFormServiceModel model);
+        BookDetailsModel GetBookDetails(int id);
+        IEnumerable<BookGenreModel> GetAllGenres();
+        void AddBook(BookFormModel model);
         Book GetBookById(int id);
-        BookFormServiceModel MapBookToFormModel(Book book);
-        void UpdateBook(int id, BookFormServiceModel model);
+        BookFormModel MapBookToFormModel(Book book);
+        void UpdateBook(int id, BookFormModel model);
         void DeleteBook(int id);
-        BookServiceModel MapBookToViewModel(Book book);
+        BookModel MapBookToViewModel(Book book);
     }
 }

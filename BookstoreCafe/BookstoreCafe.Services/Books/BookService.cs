@@ -47,7 +47,7 @@ namespace BookstoreCafe.Services.Books
             }
         }
 
-        public BookDetailsServiceModel GetBookDetails(int id)
+        public BookDetailsModel GetBookDetails(int id)
         {
             var book = _context.Books
                 .Include(b => b.Genre)
@@ -58,7 +58,7 @@ namespace BookstoreCafe.Services.Books
                 return null;
             }
 
-            return new BookDetailsServiceModel
+            return new BookDetailsModel
             {
                 Id = book.Id,
                 Title = book.Title,
@@ -73,10 +73,10 @@ namespace BookstoreCafe.Services.Books
             };
         }
 
-        public IEnumerable<BookGenreServiceModel> GetAllGenres()
+        public IEnumerable<BookGenreModel> GetAllGenres()
         {
             return _context.Genres
-                .Select(g => new BookGenreServiceModel
+                .Select(g => new BookGenreModel
                 {
                     Id = g.Id,
                     Name = g.Name
@@ -84,7 +84,7 @@ namespace BookstoreCafe.Services.Books
                 .ToList();
         }
 
-        public void AddBook(BookFormServiceModel model)
+        public void AddBook(BookFormModel model)
         {
             var book = new Book
             {
@@ -108,9 +108,9 @@ namespace BookstoreCafe.Services.Books
             return _context.Books.Find(id);
         }
 
-        public BookFormServiceModel MapBookToFormModel(Book book)
+        public BookFormModel MapBookToFormModel(Book book)
         {
-            return new BookFormServiceModel
+            return new BookFormModel
             {
                 Title = book.Title,
                 Author = book.Author,
@@ -125,7 +125,7 @@ namespace BookstoreCafe.Services.Books
             };
         }
 
-        public void UpdateBook(int id, BookFormServiceModel model)
+        public void UpdateBook(int id, BookFormModel model)
         {
             var book = _context.Books.Find(id);
             if (book == null)
@@ -158,9 +158,9 @@ namespace BookstoreCafe.Services.Books
             _context.SaveChanges();
         }
 
-        public BookServiceModel MapBookToViewModel(Book book)
+        public BookModel MapBookToViewModel(Book book)
         {
-            return new BookServiceModel
+            return new BookModel
             {
                 Id = book.Id,
                 Title = book.Title,

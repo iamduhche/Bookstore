@@ -1,0 +1,38 @@
+﻿@model CheckoutViewModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center text-primary">Checkout</h2>
+                    <hr />
+                    <form asp-action="Checkout" method="post">
+                        <div class="form-group">
+                            <label asp-for="DeliveryAddress" class="control-label"></label>
+                            <input asp-for="DeliveryAddress" class="form-control" />
+                            <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DeliveryCity" class="control-label"></label>
+                            <input asp-for="DeliveryCity" class="form-control" />
+                            <span asp-validation-for="DeliveryCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DeliveryPostalCode" class="control-label"></label>
+                            <input asp-for="DeliveryPostalCode" class="form-control" />
+                            <span asp-validation-for="DeliveryPostalCode" class="text-danger"></span>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Confirm Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

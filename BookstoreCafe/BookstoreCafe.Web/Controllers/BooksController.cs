@@ -61,13 +61,13 @@ namespace BookstoreCafe.Controllers
         public IActionResult Add()
         {
             var genres = _bookService.GetAllGenres();
-            var model = new BookFormServiceModel { Genres = genres };
+            var model = new BookFormModel { Genres = genres };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Add(BookFormServiceModel model)
+        public IActionResult Add(BookFormModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace BookstoreCafe.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, BookFormServiceModel model)
+        public IActionResult Edit(int id, BookFormModel model)
         {
             if (!ModelState.IsValid)
             {

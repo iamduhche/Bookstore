@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookstoreCafe.Services.Books.Models
 {
-    public class BookFormServiceModel
+    public class BookFormModel
     {
         [Required]
         [StringLength(200, MinimumLength = 3)]
@@ -45,7 +45,7 @@ namespace BookstoreCafe.Services.Books.Models
 
         [Display(Name = "Genre")]
         public int GenreId { get; init; }
-        public IEnumerable<BookGenreServiceModel> Genres { get; set; } = new List<BookGenreServiceModel>();
+        public IEnumerable<BookGenreModel> Genres { get; set; } = new List<BookGenreModel>();
 
     }
 }

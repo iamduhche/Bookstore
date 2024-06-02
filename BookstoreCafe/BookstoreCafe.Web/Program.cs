@@ -2,12 +2,12 @@ using BookstoreCafe.Data;
 using BookstoreCafe.Data.Entities;
 using BookstoreCafe.Infrastructure;
 using BookstoreCafe.Services.Books;
+using BookstoreCafe.Services.Orders;
 using BookstoreCafe.Services.ShoppingCarts;
 using BookstoreCafe.Services.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,16 +33,14 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Add controllers with views
-builder.Services.AddControllersWithViews();
-
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
-// Build the app
 var app = builder.Build();
 
 // Seed admin user
@@ -83,6 +81,26 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "shoppingCart",
     pattern: "{controller=ShoppingCart}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "checkout",
+    pattern: "{controller=ShoppingCart}/{action=Checkout}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "adminPanel",
+    pattern: "{controller=Admin}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "adminPanelOrder",
+    pattern: "{controller=Admin}/{action=Orders}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "adminPanelOrderDetails",
+    pattern: "{controller=Admin}/{action=OrderDetails}/{id?}"
 );
 app.MapRazorPages();
 
