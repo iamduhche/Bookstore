@@ -4,6 +4,7 @@ using BookstoreCafe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstoreCafe.Data.Migrations
 {
     [DbContext(typeof(BookCafeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240602104108_GenreFix")]
+    partial class GenreFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,7 +292,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "1297764b-dd30-4c4a-be10-a188dde20808",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "177d22af-6f76-42b6-8216-84f3a2b25482",
+                            ConcurrencyStamp = "fe1a5c9e-447c-471b-8b19-cd3023ab68eb",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -298,9 +300,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEATkOt41b9JGy0UjQ1/g7NnZdhPW700QD83KKdduRY4M2ILgLFOQEsH5O0ipMlY0fA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL5bq9Obf7qJvo/ir631LzfBg5igO5Z8IKZAP6kB7K1o+SlUIQxDniaC2I8TQc4I9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "457e6829-9ca1-4472-9b23-6ef48b6b70b4",
+                            SecurityStamp = "d40d556a-628a-4b0a-acac-dc9302c748d5",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -308,7 +310,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "574371A3-4F4E-409A-9A0E-B2F1EA03E1AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9846e42a-df81-4df3-915d-a78a66e9c163",
+                            ConcurrencyStamp = "5fca69b9-a4f9-4c8f-b4a8-d7d3f2fe3082",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Bate",
@@ -316,9 +318,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF668nmvVPWNSCdpIIi3o9b7714Ir4XDfE0emMypEt/u8sXoJvLNbWayRAbad81Y0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELUl2RQ+x0gzbJmXLc+iPrlylxjJtAYbWEUnR4KSggBGmk+jCBLTC74G0xpeqi2Hlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e1afcee4-f08c-491b-be31-dfd872687ea5",
+                            SecurityStamp = "9ec75b5d-21e4-4d5f-af6d-fab1a9961a4d",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

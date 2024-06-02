@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BookstoreCafe.Data
 {
@@ -11,6 +12,7 @@ namespace BookstoreCafe.Data
         private User adminUser { get; set; } = null!;
         private Genre adventure { get; set; } = null!;
         private Genre romance { get; set; } = null!;
+        private Genre youngAdult { get; set; } = null!;
         private Book firstBook { get; set; } = null!;
         private Book secondBook { get; set; } = null!;
         private Book thirdBook { get; set; } = null!;
@@ -23,9 +25,22 @@ namespace BookstoreCafe.Data
         public DbSet<Book> Books { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<MenuItem> MenuItems { get; set; } = null!;
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            builder.Entity<ShoppingCart>()
+                .HasMany(c => c.Items)
+                .WithOne(i => i.ShoppingCart)
+                .HasForeignKey(i => i.ShoppingCartId);
+
+            builder.Entity<ShoppingCartItem>()
+                .HasOne(i => i.Book)
+                .WithMany()
+                .HasForeignKey(i => i.BookId);
+
             SeedUsers();
             builder.Entity<User>()
                 .HasData(this.guestUser,
@@ -81,7 +96,7 @@ namespace BookstoreCafe.Data
             this.adventure = new Genre()
             {
                 Id = 1,
-                Name = "Fiction"
+                Name = "Adventure"
             };
 
             this.romance = new Genre()
@@ -89,6 +104,13 @@ namespace BookstoreCafe.Data
                 Id = 2,
                 Name = "Romance"
             };
+
+            this.youngAdult = new Genre()
+            {
+                Id = 3,
+                Name = "Young Adult"
+            };
+
         }
 
         private void SeedBooks()
