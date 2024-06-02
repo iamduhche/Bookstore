@@ -37,12 +37,19 @@ public class ShoppingCartController : Controller
         return RedirectToAction("Index");
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddToCart(int bookId)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        await _shoppingCartService.AddToCart(userId, bookId);
-        return RedirectToAction("Index");
+        if (User.Identity.IsAuthenticated)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await _shoppingCartService.AddToCart(userId, bookId);
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return Unauthorized();
+        }
+
     }
 }
