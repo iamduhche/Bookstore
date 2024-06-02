@@ -2,6 +2,7 @@ using BookstoreCafe.Data;
 using BookstoreCafe.Data.Entities;
 using BookstoreCafe.Infrastructure;
 using BookstoreCafe.Services.Books;
+using BookstoreCafe.Services.ShoppingCarts;
 using BookstoreCafe.Services.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 // Register application services
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 
 // Add controllers with views
 builder.Services.AddControllersWithViews();
@@ -78,6 +80,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
+app.MapControllerRoute(
+    name: "shoppingCart",
+    pattern: "{controller=ShoppingCart}/{action=Index}/{id?}"
+);
 app.MapRazorPages();
 
 app.Run();
