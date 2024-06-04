@@ -49,7 +49,6 @@ namespace BookstoreCafe.Services.Books
             }
         }
 
-
         public BookDetailsModel GetBookDetails(int id)
         {
             var book = _context.Books
