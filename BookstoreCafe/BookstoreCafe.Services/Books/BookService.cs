@@ -28,24 +28,27 @@ namespace BookstoreCafe.Services.Books
                 .Where(b => b.Title.Contains(searchString) || b.Author.Contains(searchString));
         }
 
-        public IEnumerable<Book> SortBooks(IEnumerable<Book> books, string sortOrder)
+        public IEnumerable<BookModel> SortBooks(IEnumerable<BookModel> books, string sortOrder)
         {
             switch (sortOrder)
             {
+                case "title_asc":
+                    return books.OrderBy(b => b.Title);
                 case "title_desc":
                     return books.OrderByDescending(b => b.Title);
-                case "Author":
+                case "author_asc":
                     return books.OrderBy(b => b.Author);
                 case "author_desc":
                     return books.OrderByDescending(b => b.Author);
-                case "Price":
+                case "price_asc":
                     return books.OrderBy(b => b.Price);
                 case "price_desc":
                     return books.OrderByDescending(b => b.Price);
                 default:
-                    return books.OrderBy(b => b.Title);
+                    return books;
             }
         }
+
 
         public BookDetailsModel GetBookDetails(int id)
         {
@@ -168,5 +171,34 @@ namespace BookstoreCafe.Services.Books
                 ImageUrl = book.ImageUrl
             };
         }
+
+        public IEnumerable<BookModel> GetFilteredAndSortedBooks(string searchString, string sortOrder)
+            {
+            var books = GetAllBooks().Select(book => new BookModel
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Price = book.Price,
+                ImageUrl = book.ImageUrl
+            });
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                books = SearchBooks(searchString).Select(book => new BookModel
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Price = book.Price,
+                    ImageUrl = book.ImageUrl
+                });
+            }
+
+            return SortBooks(books, sortOrder);
+        }
+
+
+
     }
 }

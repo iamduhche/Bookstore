@@ -14,19 +14,14 @@ namespace BookstoreCafe.Controllers
             _bookService = bookService;
         }
 
-        [Authorize(Roles = "Administrator")]
         public IActionResult All(string searchString, string sortOrder)
         {
-            var books = _bookService.GetAllBooks();
+            ViewData["TitleSortParm"] = sortOrder == "title_asc" ? "title_asc" : "title_desc";
+            ViewData["AuthorSortParm"] = sortOrder == "author_asc" ? "author_asc" : "author_desc";
+            ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_asc" : "price_desc";
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                books = _bookService.SearchBooks(searchString);
-            }
-
-            var sortedBooks = _bookService.SortBooks(books, sortOrder);
-
-            return View(sortedBooks);
+            var books = _bookService.GetFilteredAndSortedBooks(searchString, sortOrder);
+            return View(books);
         }
 
         [HttpGet]

@@ -23,14 +23,17 @@ namespace BookstoreCafe.Services.Books.Models
 
         [Required]
         [Range(1000, 9999)]
+        [Display(Name = "Year of Release")]
         public int? YearOfRelease { get; set; }
 
         [Required]
         [Range(1, 10000)]
+        [Display(Name = "Number of Pages")]
         public int? NumberOfPages { get; set; }
 
 
         [Required]
+        [Display(Name = "Type of Cover")]
         public string TypeOfCover { get; set; } = null!;
 
         [Required]
@@ -38,9 +41,8 @@ namespace BookstoreCafe.Services.Books.Models
         public string ImageUrl { get; init; } = null!;
 
         [Required]
-        [Range(0.00, 100.00,
-            ErrorMessage = "Price per month must be a positive number and less than {2} leva.")]
-        [Display(Name = "Price Per Month")]
+        [Range(0.00, 1000.00,
+            ErrorMessage = "Price must be a positive number and less than {2}$.")]
         public decimal Price { get; init; }
 
         [Display(Name = "Genre")]

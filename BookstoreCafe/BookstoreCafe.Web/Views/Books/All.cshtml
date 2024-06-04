@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BookstoreCafe.Data.Entities.Book>
+﻿@model IEnumerable<BookstoreCafe.Services.Books.Models.BookModel>
+
 
 @{
     ViewBag.Title = "Our Bookstore";
@@ -23,10 +24,11 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
         <div class="d-flex justify-content-center">
-            <a asp-action="All" asp-route-sortOrder="@ViewData["TitleSortParm"]" class="btn btn-outline-light mx-1">Title</a>
-            <a asp-action="All" asp-route-sortOrder="@ViewData["AuthorSortParm"]" class="btn btn-outline-light mx-1">Author</a>
-            <a asp-action="All" asp-route-sortOrder="@ViewData["PriceSortParm"]" class="btn btn-outline-light mx-1">Price</a>
+            <a asp-action="All" asp-route-sortOrder="@((string)ViewData["TitleSortParm"] == "title_asc" || ViewData["TitleSortParm"] == null ? "title_desc" : "title_asc")" asp-route-searchString="@ViewData["CurrentFilter"]" class="btn btn-outline-light mx-1">Title</a>
+            <a asp-action="All" asp-route-sortOrder="@((string)ViewData["AuthorSortParm"] == "author_asc" ? "author_desc" : "author_asc")" asp-route-searchString="@ViewData["CurrentFilter"]" class="btn btn-outline-light mx-1">Author</a>
+            <a asp-action="All" asp-route-sortOrder="@((string)ViewData["PriceSortParm"] == "price_asc" ? "price_desc" : "price_asc")" asp-route-searchString="@ViewData["CurrentFilter"]" class="btn btn-outline-light mx-1">Price</a>
         </div>
+
     </form>
 
     <div class="row">
@@ -50,7 +52,3 @@
         }
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

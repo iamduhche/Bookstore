@@ -8,7 +8,7 @@ namespace BookstoreCafe.Services.Books
     {
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> SearchBooks(string searchString);
-        IEnumerable<Book> SortBooks(IEnumerable<Book> books, string sortOrder);
+        IEnumerable<BookModel> SortBooks(IEnumerable<BookModel> books, string sortOrder);
         BookDetailsModel GetBookDetails(int id);
         IEnumerable<BookGenreModel> GetAllGenres();
         void AddBook(BookFormModel model);
@@ -17,5 +17,6 @@ namespace BookstoreCafe.Services.Books
         void UpdateBook(int id, BookFormModel model);
         void DeleteBook(int id);
         BookModel MapBookToViewModel(Book book);
+        IEnumerable<BookModel> GetFilteredAndSortedBooks(string searchString, string sortOrder);
     }
 }

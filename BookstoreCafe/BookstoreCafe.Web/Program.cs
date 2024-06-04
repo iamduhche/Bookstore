@@ -68,40 +68,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "bookDetails",
-    pattern: "Books/Details/{slug}-{id}",
-    defaults: new { controller = "Books", action = "Details" }
-);
-
-app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
 app.MapControllerRoute(
-    name: "shoppingCart",
-    pattern: "{controller=ShoppingCart}/{action=Index}/{id?}"
+    name: "bookDetails",
+    pattern: "Books/Details/{slug}-{id}"
 );
 
-app.MapControllerRoute(
-    name: "checkout",
-    pattern: "{controller=ShoppingCart}/{action=Checkout}/{id?}"
-);
-
-app.MapControllerRoute(
-    name: "adminPanel",
-    pattern: "{controller=Admin}/{action=Index}/{id?}"
-);
-
-app.MapControllerRoute(
-    name: "adminPanelOrder",
-    pattern: "{controller=Admin}/{action=Orders}/{id?}"
-);
-
-app.MapControllerRoute(
-    name: "adminPanelOrderDetails",
-    pattern: "{controller=Admin}/{action=OrderDetails}/{id?}"
-);
 app.MapRazorPages();
 
 app.Run();
