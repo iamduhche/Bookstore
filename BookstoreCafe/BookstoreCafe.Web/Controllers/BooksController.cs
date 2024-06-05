@@ -14,7 +14,6 @@ namespace BookstoreCafe.Controllers
             _bookService = bookService;
         }
 
-        [Authorize(Roles = "Administrator")]
         public IActionResult All(string searchString, string sortOrder)
         {
             ViewData["TitleSortParm"] = sortOrder == "title_asc" ? "title_asc" : "title_desc";
