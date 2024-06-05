@@ -16,6 +16,12 @@ namespace BookstoreCafe.Data
         private Book firstBook { get; set; } = null!;
         private Book secondBook { get; set; } = null!;
         private Book thirdBook { get; set; } = null!;
+        private Category beverages { get; set; } = null!;
+        private Category pastries { get; set; } = null!;
+        private MenuItem firstItem { get; set; } = null!;
+        private MenuItem secondItem { get; set; } = null!;
+        private MenuItem thirdItem { get; set; } = null!;
+
 
         public BookCafeDbContext(DbContextOptions<BookCafeDbContext> options)
             : base(options)
@@ -25,6 +31,7 @@ namespace BookstoreCafe.Data
         public DbSet<Book> Books { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<MenuItem> MenuItems { get; set; } = null!;
+        public DbSet<Category> MenuCategories { get; set; } = null!;
         public DbSet<ShoppingCart> ShoppingCarts { get; set; } = null!;
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
@@ -57,6 +64,18 @@ namespace BookstoreCafe.Data
                 .HasData(this.firstBook,
                         this.secondBook,
                         this.thirdBook);
+
+            SeedMenuCategories();
+            builder.Entity<Category>()
+                .HasData(this.beverages,
+                         this.pastries);
+
+            SeedMenuItems();
+            builder.Entity<MenuItem>()
+                .HasData(this.firstItem,
+                        this.secondItem,
+                        this.thirdItem);
+            
 
             base.OnModelCreating(builder);
         }
@@ -159,6 +178,53 @@ namespace BookstoreCafe.Data
                 ImageUrl = "https://gcdnb.pbrd.co/images/YyL1yTBQMKNd.png?o=1",
                 GenreId = this.adventure.Id,
 
+            };
+        }
+
+        private void SeedMenuCategories()
+        {
+            this.beverages = new Category()
+            {
+                Id = 1,
+                Name = "Beverages"
+            };
+            this.pastries = new Category()
+            {
+                Id = 2,
+                Name = "Pastries"
+            };
+        }
+
+        private void SeedMenuItems()
+        {
+            this.firstItem = new MenuItem()
+            {
+                Id = 1,
+                Name = "Cappuccino",
+                Ingredients = "MILK, BREWED ESPRESSO",
+                ImageUrl = "https://gcdnb.pbrd.co/images/3EpytMWSVnJJ.jpg?o=1",
+                Price = 4.99M,
+                CategoryId = this.beverages.Id
+            };
+
+            this.secondItem = new MenuItem()
+            {
+                Id = 2,
+                Name = "Caffè Mocha",
+                Ingredients = "MILK, BREWED ESPRESSO, MOCHA SAUCE [WATER, SUGAR, COCOA PROCESSED WITH ALKALI, NATURAL FLAVOR], WHIPPED CREAM [CREAM (CREAM, MONO AND DIGLYCERIDES, CARAGEENAN), VANILLA SYRUP (SUGAR, WATER, NATURAL FLAVORS, POTASSIUM SORBATE, CITRIC ACID)]",
+                ImageUrl = "https://gcdnb.pbrd.co/images/A6obyfAlzZbf.jpg?o=1",
+                Price = 6.99M,
+                CategoryId = this.beverages.Id
+            };
+
+            this.thirdItem = new MenuItem()
+            {
+                Id = 3,
+                Name = "Blueberry Muffin",
+                Ingredients = "Sugar, Enriched Wheat Flour [Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid], Blueberries, Plain Yogurt [Milk, Skim Milk, Skim Milk Powder, Whey, Bacterial Culture], Soybean And / Or Canola Oil, Eggs, Honey, Baking Powder [Sodium Acid Pyrophosphate, Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate], Lemon Zest [Lemon Peel, Sugar, Lemon Oil], Natural Flavor, Sea Salt, Whey [Milk], Soy Lecithin",
+                ImageUrl = "https://gcdnb.pbrd.co/images/PkcXbeAeqOxS.jpg?o=1",
+                Price = 6.99M,
+                CategoryId = this.pastries.Id
             };
         }
 

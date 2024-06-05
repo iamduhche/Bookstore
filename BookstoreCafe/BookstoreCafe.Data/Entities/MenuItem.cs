@@ -13,13 +13,21 @@ namespace BookstoreCafe.Data.Entities
         public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(300, MinimumLength = 4)]
-        public string Ingridients { get; set; } = null;
+        [StringLength(1000, MinimumLength = 4)]
+        public string Ingredients { get; set; } = null;
+
+        [Required]
+        [Url]
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         [Column(TypeName = "decimal(12,2)")]
         [Range(0, 999999999999.99)]
         public decimal Price { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+        public Category Category { get; init; } = null!;
 
     }
 }

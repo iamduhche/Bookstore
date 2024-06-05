@@ -4,6 +4,7 @@ using BookstoreCafe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstoreCafe.Data.Migrations
 {
     [DbContext(typeof(BookCafeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240605072559_MenuCustomImages")]
+    partial class MenuCustomImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,7 +196,7 @@ namespace BookstoreCafe.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ingredients")
+                    b.Property<string>("Ingridients")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
@@ -219,7 +221,7 @@ namespace BookstoreCafe.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             ImageUrl = "https://gcdnb.pbrd.co/images/3EpytMWSVnJJ.jpg?o=1",
-                            Ingredients = "MILK, BREWED ESPRESSO",
+                            Ingridients = "MILK, BREWED ESPRESSO",
                             Name = "Cappuccino",
                             Price = 4.99m
                         },
@@ -227,8 +229,8 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            ImageUrl = "https://gcdnb.pbrd.co/images/A6obyfAlzZbf.jpg?o=1",
-                            Ingredients = "MILK, BREWED ESPRESSO, MOCHA SAUCE [WATER, SUGAR, COCOA PROCESSED WITH ALKALI, NATURAL FLAVOR], WHIPPED CREAM [CREAM (CREAM, MONO AND DIGLYCERIDES, CARAGEENAN), VANILLA SYRUP (SUGAR, WATER, NATURAL FLAVORS, POTASSIUM SORBATE, CITRIC ACID)]",
+                            ImageUrl = "https://gcdnb.pbrd.co/images/DV9TOMYWI4gF.jpg?o=1",
+                            Ingridients = "MILK, BREWED ESPRESSO, MOCHA SAUCE [WATER, SUGAR, COCOA PROCESSED WITH ALKALI, NATURAL FLAVOR], WHIPPED CREAM [CREAM (CREAM, MONO AND DIGLYCERIDES, CARAGEENAN), VANILLA SYRUP (SUGAR, WATER, NATURAL FLAVORS, POTASSIUM SORBATE, CITRIC ACID)]",
                             Name = "Caffè Mocha",
                             Price = 6.99m
                         },
@@ -237,7 +239,7 @@ namespace BookstoreCafe.Data.Migrations
                             Id = 3,
                             CategoryId = 2,
                             ImageUrl = "https://gcdnb.pbrd.co/images/PkcXbeAeqOxS.jpg?o=1",
-                            Ingredients = "Sugar, Enriched Wheat Flour [Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid], Blueberries, Plain Yogurt [Milk, Skim Milk, Skim Milk Powder, Whey, Bacterial Culture], Soybean And / Or Canola Oil, Eggs, Honey, Baking Powder [Sodium Acid Pyrophosphate, Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate], Lemon Zest [Lemon Peel, Sugar, Lemon Oil], Natural Flavor, Sea Salt, Whey [Milk], Soy Lecithin",
+                            Ingridients = "Sugar, Enriched Wheat Flour [Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid], Blueberries, Plain Yogurt [Milk, Skim Milk, Skim Milk Powder, Whey, Bacterial Culture], Soybean And / Or Canola Oil, Eggs, Honey, Baking Powder [Sodium Acid Pyrophosphate, Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate], Lemon Zest [Lemon Peel, Sugar, Lemon Oil], Natural Flavor, Sea Salt, Whey [Milk], Soy Lecithin",
                             Name = "Blueberry Muffin",
                             Price = 6.99m
                         });
@@ -432,7 +434,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "1297764b-dd30-4c4a-be10-a188dde20808",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3cbe184e-32a4-48f7-9b78-3ce9b780f09e",
+                            ConcurrencyStamp = "ca10ecd7-afe0-48fa-9f2c-1ca6ab68836c",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -440,9 +442,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED7pAIswAPV0PtOxm1MdN65xPFZW1Fqrc4NSuGBfnLtnYftqrijzT4xdnOvl0sZl5A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGQ3M1JiM5Mvu0h+PJluizwlitpJzC+FAcILE15Kng28YidABepl468xEOCuHOmxyg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb7f2446-aaaf-46f7-8003-da6df113dacf",
+                            SecurityStamp = "9c257411-5899-4a50-b884-c163dd85fb35",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -450,7 +452,7 @@ namespace BookstoreCafe.Data.Migrations
                         {
                             Id = "574371A3-4F4E-409A-9A0E-B2F1EA03E1AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60a6b29c-a295-491d-9cad-7d38caeb4629",
+                            ConcurrencyStamp = "9c49e8ec-9d72-4370-b985-5409c98d05c7",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Bate",
@@ -458,9 +460,9 @@ namespace BookstoreCafe.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMPvUbCsEmLmYJhzPLGgrfQdkjwso5/Lx/KhMtrMYx1yhVIubkFxWVL7lmkvJJP0UA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA65/bWhoGaXylAV053h62TbA7/UjxZa5s5E5KHa7qPSVaJe0ppg4t5gcDG2sslXNA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dd5d0bc8-784a-4903-83ec-7a5c043716ba",
+                            SecurityStamp = "c85a4b96-299d-4e4b-ad9d-11744e2f5671",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
