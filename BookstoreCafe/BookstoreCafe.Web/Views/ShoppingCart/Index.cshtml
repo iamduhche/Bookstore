@@ -8,7 +8,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 100px">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
             <div class="card shadow">
@@ -55,7 +55,7 @@
                             <h4>Total: $@Model.Total</h4>
                         </div>
                         <div class="text-center mt-4">
-                            <a href="@Url.Action("All", "Books")" class="btn btn-primary mr-2">Continue Shopping</a>
+                            <a href="@Url.Action("All", "Books")" class="btn btn-primary mr-2" style="margin-bottom: 10px">Continue Shopping</a>
                             <form method="post" asp-action="Checkout" asp-controller="ShoppingCart">
                                 <button type="submit" class="btn btn-success">Checkout</button>
                             </form>

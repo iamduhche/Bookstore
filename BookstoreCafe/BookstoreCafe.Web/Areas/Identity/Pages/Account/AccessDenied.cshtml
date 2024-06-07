@@ -1,0 +1,50 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .access-denied-container {
+            margin-top: 10%;
+        }
+
+        .access-denied-card {
+            border: 1px solid #dc3545;
+        }
+
+        .access-denied-header {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container access-denied-container" style="margin-bottom: 100px">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card access-denied-card shadow-lg">
+                    <div class="card-header access-denied-header text-center">
+                        <h1 class="card-title">@ViewData["Title"]</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text">You do not have access to this resource.</p>
+                        <a href="javascript:history.back()" class="btn btn-secondary mt-3">Go Back</a>
+                        <a href="/" class="btn btn-primary mt-3">Home Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

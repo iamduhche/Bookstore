@@ -1,6 +1,10 @@
 ﻿@model CheckoutViewModel
 
-<div class="container mt-5">
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="container mt-5" style="margin-bottom: 100px">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             <div class="card shadow">
@@ -23,7 +27,7 @@
                             <input asp-for="DeliveryPostalCode" class="form-control" />
                             <span asp-validation-for="DeliveryPostalCode" class="text-danger"></span>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center" style="margin-top: 10px">
                             <button type="submit" class="btn btn-success">Confirm Order</button>
                         </div>
                     </form>

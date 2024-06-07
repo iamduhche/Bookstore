@@ -2,8 +2,12 @@
 @using BookstoreCafe.Areas.Identity.Pages.Account;
 @model LoginModel
 
+@{
+    ViewBag.Title = "Login";
+}
+
 <head>
-    <title>Login</title>
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/login-style.css" />
 </head>
 

@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<BookstoreCafe.Services.Books.Models.BookModel>
 
-
 @{
     ViewBag.Title = "Our Bookstore";
 }
@@ -28,23 +27,26 @@
             <a asp-action="All" asp-route-sortOrder="@((string)ViewData["AuthorSortParm"] == "author_asc" ? "author_desc" : "author_asc")" asp-route-searchString="@ViewData["CurrentFilter"]" class="btn btn-outline-light mx-1">Author</a>
             <a asp-action="All" asp-route-sortOrder="@((string)ViewData["PriceSortParm"] == "price_asc" ? "price_desc" : "price_asc")" asp-route-searchString="@ViewData["CurrentFilter"]" class="btn btn-outline-light mx-1">Price</a>
         </div>
-
     </form>
 
     <div class="row">
         @foreach (var book in Model)
         {
             <div class="col-md-4 mb-4">
-                <div class="card shadow" style="height: 790px;">
+                <div class="card shadow h-100 d-flex flex-column">
                     <img class="card-img-top" height="575px" src="@book.ImageUrl" alt="@book.Title" />
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <h5 class="card-title text-primary">@book.Title</h5>
                             <p class="card-text text-dark">@book.Author</p>
+                            <p class="card-text text-dark" style="margin-bottom: 10px">$@book.Price</p>
                         </div>
-                        <div>
-                            <p class="card-text text-dark">$@book.Price</p>
-                            <a href="@Url.Action("Details", "Books", new { slug = UrlHelper.GenerateSlug(book.Title, book.Author), id = book.Id })" class="btn btn-primary mt-auto">View Details</a>
+                        <div class="d-flex justify-content-between mt-auto">
+                            <a href="@Url.Action("Details", "Books", new { slug = UrlHelper.GenerateSlug(book.Title, book.Author), id = book.Id })" class="btn btn-primary">View Details</a>
+                            <form method="post" asp-action="AddToCart" asp-controller="ShoppingCart">
+                                <input type="hidden" name="bookId" value="@book.Id" />
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>

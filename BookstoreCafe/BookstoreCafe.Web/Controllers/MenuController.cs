@@ -48,7 +48,7 @@ namespace BookstoreCafe.Web.Controllers
             {
                 MenuItems = menuItems.Select(mi => new MenuItemViewModel
                 {
-                    Id = mi.Id,  // Ensure Id is mapped
+                    Id = mi.Id,
                     Name = mi.Name,
                     Ingredients = mi.Ingredients,
                     ImageUrl = mi.ImageUrl,
