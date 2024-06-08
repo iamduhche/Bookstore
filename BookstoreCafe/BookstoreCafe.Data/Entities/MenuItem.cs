@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging.Abstractions;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using static BookstoreCafe.Data.DataConstants.MenuItem;
 
 namespace BookstoreCafe.Data.Entities
 {
@@ -9,12 +10,12 @@ namespace BookstoreCafe.Data.Entities
         public int Id { get; init; }
 
         [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(1000, MinimumLength = 4)]
-        public string Ingredients { get; set; } = null;
+        [StringLength(IngredientsMaxLength, MinimumLength = IngredientsMinLength)]
+        public string Ingredients { get; set; } = null!;
 
         [Required]
         [Url]

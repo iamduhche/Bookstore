@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using BookstoreCafe.Data.Enums;
 
 namespace BookstoreCafe.Services.Orders
 {
@@ -65,7 +66,7 @@ namespace BookstoreCafe.Services.Orders
 
 
         public async Task<Order> GetOrderById(int orderId)
-        {
+        {   
             return await _context.Orders
                 .Include(o => o.User)
                 .Include(o => o.OrderDetails)

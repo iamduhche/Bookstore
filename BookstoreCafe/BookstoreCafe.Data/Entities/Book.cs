@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using static BookstoreCafe.Data.DataConstants.Book;
 
 
 namespace BookstoreCafe.Data.Entities
@@ -9,15 +10,15 @@ namespace BookstoreCafe.Data.Entities
         public int Id { get; init; }
 
         [Required]
-        [StringLength(200, MinimumLength = 3)]
+        [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
         public string Title { get; set; } = null!;
 
         [Required]
-        [StringLength(100)]
+        [StringLength(AuthorMaxLength, MinimumLength = AuthorMinLength)]
         public string Author { get; set; } = null!;
 
         [Required]
-        [StringLength(2500)]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         public string Description { get; set; } = null!;
 
         [Required]
@@ -26,13 +27,12 @@ namespace BookstoreCafe.Data.Entities
         public decimal Price { get; set; }
 
         [Required]
-        [Range(1000, 9999)]
+        [Range(YearOfReleaseMinRange, YearOfReleaseMaxRange)]
         public int? YearOfRelease { get; set; }
 
         [Required]
-        [Range(1, 10000)]
+        [Range(NumberOfPagesMinRange, NumberOfPagesMaxRange)]
         public int? NumberOfPages { get; set; }
-
 
         [Required]
         public string TypeOfCover { get; set; } = null!;
@@ -43,7 +43,6 @@ namespace BookstoreCafe.Data.Entities
 
         [Required]
         public int GenreId { get; set; }
-
         public Genre Genre { get; init; } = null!;
     }
 }

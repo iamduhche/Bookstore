@@ -1,4 +1,5 @@
 ﻿using BookstoreCafe.Data.Entities;
+using BookstoreCafe.Data.Enums;
 using BookstoreCafe.Services.Orders.Models;
 using System;
 using System.Collections.Generic;
