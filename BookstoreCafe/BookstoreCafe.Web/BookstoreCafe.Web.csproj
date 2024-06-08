@@ -30,8 +30,4 @@
     <ProjectReference Include="..\BookstoreCafe.Services\BookstoreCafe.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
-  </ItemGroup>
-
 </Project>

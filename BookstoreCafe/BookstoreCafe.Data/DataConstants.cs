@@ -14,7 +14,7 @@ namespace BookstoreCafe.Data
             public const int TitleMaxLength = 200;
             public const int TitleMinLength = 3;
 
-            public const int AuthorMaxLength = 100;
+            public const int AuthorMaxLength = 50;
             public const int AuthorMinLength = 3;
 
             public const int DescriptionMaxLength = 2500;

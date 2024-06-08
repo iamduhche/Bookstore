@@ -40,6 +40,7 @@ namespace BookstoreCafe.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateOrderStatus(int orderId, OrderStatus status)
         {
             await _orderService.UpdateOrderStatus(orderId, status);
@@ -47,6 +48,7 @@ namespace BookstoreCafe.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Deliver(int orderId)
         {
             await _orderService.RemoveOrder(orderId);
@@ -54,3 +56,4 @@ namespace BookstoreCafe.Web.Controllers
         }
     }
 }
+    

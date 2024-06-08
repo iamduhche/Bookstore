@@ -26,6 +26,7 @@ public class ShoppingCartController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateQuantity(int bookId, int quantity)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -34,6 +35,7 @@ public class ShoppingCartController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoveFromCart(int bookId)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -42,6 +44,7 @@ public class ShoppingCartController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddToCart(int bookId)
     {
         if (User.Identity.IsAuthenticated)
@@ -70,6 +73,7 @@ public class ShoppingCartController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Checkout(CheckoutViewModel model)
     {
         if (!ModelState.IsValid)

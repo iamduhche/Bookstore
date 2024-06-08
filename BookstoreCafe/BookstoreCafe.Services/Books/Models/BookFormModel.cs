@@ -4,30 +4,31 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BookstoreCafe.Data.DataConstants.Book;
 
 namespace BookstoreCafe.Services.Books.Models
 {
     public class BookFormModel
     {
         [Required]
-        [StringLength(200, MinimumLength = 3)]
+        [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
         public string Title { get; init; } = null!;
 
         [Required]
-        [StringLength(100)]
+        [StringLength(AuthorMaxLength, MinimumLength = AuthorMinLength)]
         public string Author { get; init; } = null!;
 
         [Required]
-        [StringLength(2500)]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         public string Description { get; init; } = null!;
 
         [Required]
-        [Range(1000, 9999)]
+        [Range(YearOfReleaseMinRange, YearOfReleaseMaxRange)]
         [Display(Name = "Year of Release")]
         public int? YearOfRelease { get; set; }
 
         [Required]
-        [Range(1, 10000)]
+        [Range(NumberOfPagesMinRange, NumberOfPagesMaxRange)]
         [Display(Name = "Number of Pages")]
         public int? NumberOfPages { get; set; }
 

@@ -69,6 +69,7 @@ namespace BookstoreCafe.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddMenu(AddMenuItemViewModel model)
         {
             if (ModelState.IsValid)
@@ -97,13 +98,16 @@ namespace BookstoreCafe.Web.Controllers
             {
                 return NotFound();
             }
+
             var model = new MenuItemViewModel
             {
                 Id = menuItem.Id,
                 Name = menuItem.Name,
                 Ingredients = menuItem.Ingredients,
                 Price = menuItem.Price,
-                ImageUrl = menuItem.ImageUrl
+                ImageUrl = menuItem.ImageUrl,
+                CategoryId = menuItem.CategoryId,
+                Categories = _context.MenuCategories.ToList()
             };
             return View(model);
         }
@@ -123,6 +127,7 @@ namespace BookstoreCafe.Web.Controllers
                 menuItem.Ingredients = model.Ingredients;
                 menuItem.Price = model.Price;
                 menuItem.ImageUrl = model.ImageUrl;
+                menuItem.CategoryId = model.CategoryId;
 
                 _context.Update(menuItem);
                 await _context.SaveChangesAsync();

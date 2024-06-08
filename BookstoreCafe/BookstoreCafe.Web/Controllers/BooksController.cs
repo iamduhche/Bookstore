@@ -66,6 +66,7 @@ namespace BookstoreCafe.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Add(BookFormModel model)
         {
             if (!ModelState.IsValid)
@@ -96,6 +97,7 @@ namespace BookstoreCafe.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, BookFormModel model)
         {
             if (!ModelState.IsValid)
@@ -126,6 +128,7 @@ namespace BookstoreCafe.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             _bookService.DeleteBook(id);
