@@ -65,7 +65,7 @@ namespace BookstoreCafe.Services.Orders
         }
 
 
-        public async Task<Order> GetOrderById(int orderId)
+        public async Task<Order?> GetOrderById(int orderId)
         {   
             return await _context.Orders
                 .Include(o => o.User)

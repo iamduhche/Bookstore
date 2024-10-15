@@ -9,10 +9,10 @@ namespace BookstoreCafe.Services.Books
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> SearchBooks(string searchString);
         IEnumerable<BookModel> SortBooks(IEnumerable<BookModel> books, string sortOrder);
-        BookDetailsModel GetBookDetails(int id);
+        BookDetailsModel? GetBookDetails(int id);
         IEnumerable<BookGenreModel> GetAllGenres();
         void AddBook(BookFormModel model);
-        Book GetBookById(int id);
+        Book? GetBookById(int id);
         BookFormModel MapBookToFormModel(Book book);
         void UpdateBook(int id, BookFormModel model);
         void DeleteBook(int id);

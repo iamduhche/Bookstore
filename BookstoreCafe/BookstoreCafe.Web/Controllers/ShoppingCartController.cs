@@ -5,6 +5,7 @@ using BookstoreCafe.Services.ShoppingCarts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 public class ShoppingCartController : Controller
 {
@@ -20,7 +21,11 @@ public class ShoppingCartController : Controller
     [Authorize]
     public async Task<IActionResult> Index()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
         var model = await _shoppingCartService.GetCart(userId);
         return View(model);
     }
@@ -29,7 +34,11 @@ public class ShoppingCartController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateQuantity(int bookId, int quantity)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
         await _shoppingCartService.UpdateCartQuantity(userId, bookId, quantity);
         return RedirectToAction("Index");
     }
@@ -38,18 +47,28 @@ public class ShoppingCartController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoveFromCart(int bookId)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
         await _shoppingCartService.RemoveFromCart(userId, bookId);
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+
     public async Task<IActionResult> AddToCart(int bookId)
     {
         if (User.Identity.IsAuthenticated)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
             await _shoppingCartService.AddToCart(userId, bookId);
             return RedirectToAction("Index");
         }
@@ -57,14 +76,17 @@ public class ShoppingCartController : Controller
         {
             return Unauthorized();
         }
-
     }
-
     public async Task<IActionResult> Checkout()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
         var cart = await _shoppingCartService.GetCart(userId);
-        if (!cart.Items.Any())
+        if (cart == null || !cart.Items.Any())
         {
             return RedirectToAction("Index");
         }
@@ -81,7 +103,11 @@ public class ShoppingCartController : Controller
             return View(model);
         }
 
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
         await _orderService.PlaceOrder(userId, model);
 
         return RedirectToAction("OrderConfirmation");

@@ -13,7 +13,7 @@ namespace BookstoreCafe.Services.Orders
     {
         Task PlaceOrder(string userId, CheckoutViewModel model);
         Task<IEnumerable<Order>> GetAllOrders();
-        Task<Order> GetOrderById(int orderId);
+        Task<Order?> GetOrderById(int orderId);
         Task UpdateOrderStatus(int orderId, OrderStatus status);
         Task<int> GetPendingOrdersCount();
         Task RemoveOrder(int orderId);

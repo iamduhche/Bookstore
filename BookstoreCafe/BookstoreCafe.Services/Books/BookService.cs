@@ -49,7 +49,7 @@ namespace BookstoreCafe.Services.Books
             }
         }
 
-        public BookDetailsModel GetBookDetails(int id)
+        public BookDetailsModel? GetBookDetails(int id)
         {
             var book = _context.Books
                 .Include(b => b.Genre)
@@ -105,7 +105,7 @@ namespace BookstoreCafe.Services.Books
             _context.SaveChanges();
         }
 
-        public Book GetBookById(int id)
+        public Book? GetBookById(int id)
         {
             return _context.Books.Find(id);
         }

@@ -9,14 +9,14 @@ namespace BookstoreCafe.Services.Books.Models
     public class BookDetailsModel
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; } = null!;
+        public string Author { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public int? YearOfRelease { get; set; }
         public int? NumberOfPages { get; set; }
-        public string TypeOfCover { get; set; }
-        public string ImageUrl { get; set; }
+        public string TypeOfCover { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
         public decimal Price { get; set; }
-        public string Genre { get; set; }
+        public string Genre { get; set; } = null!;
     }
 }

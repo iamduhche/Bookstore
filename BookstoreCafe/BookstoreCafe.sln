@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookstoreCafe.Data", "Books
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookstoreCafe.Services", "BookstoreCafe.Services\BookstoreCafe.Services.csproj", "{756E4940-7DC9-4F62-8956-905147A55491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreCafe.Web", "BookstoreCafe.Web\BookstoreCafe.Web.csproj", "{163A1E63-0FC1-4EFF-9F25-B08194DC9FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookstoreCafe.Web", "BookstoreCafe.Web\BookstoreCafe.Web.csproj", "{163A1E63-0FC1-4EFF-9F25-B08194DC9FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

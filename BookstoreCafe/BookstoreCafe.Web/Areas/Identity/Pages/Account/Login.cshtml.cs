@@ -63,7 +63,6 @@ namespace BookstoreCafe.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
